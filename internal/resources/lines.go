@@ -1,64 +1,71 @@
 package lines
 
 import (
-	"http"
+	"fmt"
+	"net/http"
+	"os"
 	"time"
+	"encoding/json"
+	"io/ioutil"
 )
+// Handling Date.
+// 	fmt.Println(lines[0].Created.Format(time.ANSIC))
+
 
 var apiURL = "https://api.tfl.gov.uk/line/mode/tube/status"
 
-
 type Lines struct {
-	ID string `json:"id"`
-	Name Array `json:"name"`
-	ModeName string `json:"modeName"`
-	Distruptions [] `json:"distruptions"`
-	Created time.Time `json:"created"`
-	modified time.Time `json:"modified"`
-	// Check, should be an array of structs
-	lineStatuses lineStatus	`json:"lineStatuses"`
-	routeSections [] `json:"serviceTypes"`
+	ID           string    `json:"id"`
+	Name         string    `json:"name"`
+	ModeName     string    `json:"modeName"`
+	Distruptions string    `json:"distruptions"`
+	Created      time.Time `json:"created"`
+	modified     time.Time `json:"modified"`
+	lineStatuses lineStatus `json:"lineStatuses"`
 }
 
 type lineStatus struct {
-	ID	int `json:"id"`
-	LineID string `json:"lineId"`
-	StatusSeverity int `json:"statusSeverity"`
-	StatusSevDescription string `json:"statusSeverityDescription"`
-	Reason string `json:"statusSeverity"`
-	Created time.Time `json:"created"`
-	Period ValidityPeriods `json:"validityPeriods"`
+	ID                   int             `json:"id"`
+	LineID               string          `json:"lineId"`
+	StatusSeverity       int             `json:"statusSeverity"`
+	StatusSevDescription string          `json:"statusSeverityDescription"`
+	Reason               string          `json:"statusSeverity"`
+	Created              time.Time       `json:"created"`
+	Period               validityPeriods `json:"validityPeriods"`
 }
 
-type ValidityPeriods struct {
-	from time.Time `json:"fromDate"`
-	to time.Time `json:"toDate"`
-	isNow bool `json:"isNow"`
+type validityPeriods struct {
+	from  time.Time `json:"fromDate"`
+	to    time.Time `json:"toDate"`
+	isNow bool      `json:"isNow"`
 }
 
 type disrutpion struct {
-	Category string `json:"category"`
+	Category            string `json:"category"`
 	CategoryDescription string `json:"categoryDescription"`
-	Description string `json:"description"`
-	AffectedRoutes [] `json:"affectedRoutes"`
-	AffectedStops []  `json:"affectedStops"`
-	ClosureText string `json:"closureText"`
+	Description         string `json:"description"`
+	ClosureText         string `json:"closureText"`
 }
+//GetLines Gets Details Of All London Underground Lines
+func GetLines() []Lines {
+	var lines []Lines
 
-
-
-func getLineStatus(string apiURL, string line) {
 	resp, err := http.Get(apiURL)
 	if err != nil {
 		fmt.Print("Error occured" + err.Error())
-		os.exit(1)
+		os.Exit(1)
 	}
-
-	data,err := ioutil.ReadAll(resp.body)
+	responseData, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Print("Error occured" + err.Error())
-		os.exit(1)
+		os.Exit(1)
 	}
-	fmt.Println(data)
-
+	err = json.Unmarshal(responseData, &lines)
+	
+	if err != nil {
+		fmt.Print("Error occured " + err.Error())
+		os.Exit(1)
+	}
+	
+	return lines
 }
