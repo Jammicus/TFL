@@ -18,5 +18,5 @@ func main() {
 	envVars := getEnvironmentVariables()
 	fmt.Println(envVars["applicationID"])
 	fmt.Println(envVars["applicationKeys"])
-	api.Test()
+	api.PrintStatus()
 }
