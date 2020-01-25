@@ -82,9 +82,9 @@ func GetLines() []Lines {
 
 func DetermineStatus(lines []Lines) []LineSummary {
 	var lineSum = make([]LineSummary, len(lines))
-
 	for index, item := range lines {
 		// var status string
+		fmt.Println(item)
 		status, err := DecodeStatus(item.LineStatuses[0].StatusSeverity, item.ModeName)
 		if err != nil {
 			fmt.Print("Error occured" + err.Error())
