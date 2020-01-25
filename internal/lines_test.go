@@ -32,12 +32,8 @@ func TestDetermineStatus(t *testing.T) {
 
 		output := DetermineStatus(test.input)
 
-		for _, item := range output {
-
-			if !cmp.Equal(item, test.expected[0]) {
-				t.Error("Expected: ", test.expected, "But got: ", item)
-			}
+		if !cmp.Equal(output[0], test.expected[0]) {
+			t.Error("Expected: ", test.expected[0], "But got: ", output[0])
 		}
-
 	}
 }
