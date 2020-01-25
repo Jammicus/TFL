@@ -80,11 +80,10 @@ func GetLines() []Lines {
 	return lines
 }
 
-func DetermineStatus(lines []Lines) []LineSummary {
+func determineStatus(lines []Lines) []LineSummary {
 	var lineSum = make([]LineSummary, len(lines))
 	for index, item := range lines {
 		// var status string
-		fmt.Println(item)
 		status, err := DecodeStatus(item.LineStatuses[0].StatusSeverity, item.ModeName)
 		if err != nil {
 			fmt.Print("Error occured" + err.Error())
@@ -97,7 +96,7 @@ func DetermineStatus(lines []Lines) []LineSummary {
 }
 
 func PrintStatus() {
-	for _, line := range DetermineStatus(GetLines()) {
+	for _, line := range determineStatus(GetLines()) {
 		emoji.Println(":metro:", " ", line.Name, " ", line.Status, " ", line.Info)
 	}
 }
