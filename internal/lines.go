@@ -57,7 +57,7 @@ type LineSummary struct {
 }
 
 //GetLines Gets Details Of All London Underground Lines
-func GetLines() []Lines {
+func getLines() []Lines {
 	var lines []Lines
 
 	resp, err := http.Get(apiURL)
@@ -96,7 +96,7 @@ func determineStatus(lines []Lines) []LineSummary {
 }
 
 func PrintStatus() {
-	for _, line := range determineStatus(GetLines()) {
+	for _, line := range determineStatus(getLines()) {
 		emoji.Println(":metro:", " ", line.Name, " ", line.Status, " ", line.Info)
 	}
 }
