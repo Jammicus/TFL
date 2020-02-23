@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	api "tfl/internal"
+	lines "tfl/internal"
 )
 
 func getEnvironmentVariables() map[string]string {
@@ -18,5 +18,5 @@ func main() {
 	envVars := getEnvironmentVariables()
 	fmt.Println(envVars["applicationID"])
 	fmt.Println(envVars["applicationKeys"])
-	api.PrintStatus()
+	lines.PrintStatus()
 }
