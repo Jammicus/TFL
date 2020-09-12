@@ -5,6 +5,7 @@ package api
 
 import (
 	"errors"
+	"fmt"
 )
 
 var cableCar = map[int]string{
@@ -255,70 +256,70 @@ func DecodeStatus(code int, modeName string) (string, error) {
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "cycle":
 		value, exists := cycle[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "dlr":
 		value, exists := dlr[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "overground":
 		value, exists := overground[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "tflRail":
 		value, exists := tflrail[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "bus":
 		value, exists := bus[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "riverBus":
 		value, exists := riverBus[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "riverTour":
 		value, exists := riverTour[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "tram":
 		value, exists := tram[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	case "tube":
 		value, exists := tube[code]
 		if exists == true {
 			return value, nil
 		}
-		return "", errors.New("Invalid Error Code " + string(code))
+		return "", errors.New("Invalid Error Code " + fmt.Sprint(code))
 
 	default:
 		return "", errors.New("Invalid Type " + modeName)
