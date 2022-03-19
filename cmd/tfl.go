@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	lines "tfl/internal"
 )
@@ -14,9 +13,5 @@ func getEnvironmentVariables() map[string]string {
 }
 
 func main() {
-
-	envVars := getEnvironmentVariables()
-	fmt.Println(envVars["applicationID"])
-	fmt.Println(envVars["applicationKeys"])
 	lines.PrintStatus()
 }
